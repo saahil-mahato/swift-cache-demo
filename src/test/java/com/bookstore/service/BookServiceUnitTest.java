@@ -144,4 +144,15 @@ class BookServiceUnitTest {
 
         verify(bookCache, times(1)).clear();
     }
+
+    /**
+     * Tests clearing the cache.
+     * <p>
+     * This test performs the following steps:
+     * <ol>
+     *   <li>Calls the {@link BookService#clearCache()} method.</li>
+     *   <li>Verifies that the {@link SwiftCache#clear()} method was called exactly once.</li>
+     * </ol>
+     * </p>
+     */
 }
