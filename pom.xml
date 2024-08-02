@@ -100,8 +100,8 @@
         <!-- SwiftCache Dependencies -->
         <dependency>
             <groupId>org.swiftcache</groupId>
-            <artifactId>swiftcache</artifactId>
-            <version>${swiftcache.version}</version>
+            <artifactId>SwiftCache</artifactId>
+            <version>1.0.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/SwiftCache.jar</systemPath>
         </dependency>

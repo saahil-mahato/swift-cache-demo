@@ -2,7 +2,7 @@ package com.bookstore.cache;
 
 import com.bookstore.model.Book;
 import com.bookstore.repository.BookRepository;
-import org.swiftcache.CacheRepository.ICacheRepository;
+import org.swiftcache.cacherepository.ICacheRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +20,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class BookCacheRepository implements ICacheRepository<String, Book> {
 
+    private final BookRepository bookRepository;
+
+
     @Autowired
-    private BookRepository bookRepository;
+    public BookCacheRepository(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     /**
      * Retrieves a {@link Book} from the data store using the given key.

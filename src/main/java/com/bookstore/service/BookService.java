@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookService {
 
+    private final SwiftCache<String, Book> bookCache;
+
     @Autowired
-    private SwiftCache<String, Book> bookCache;
+    public BookService(SwiftCache<String, Book> bookCache) {
+        this.bookCache = bookCache;
+    }
 
     public Book getBook(String id) {
         return bookCache.get(id);

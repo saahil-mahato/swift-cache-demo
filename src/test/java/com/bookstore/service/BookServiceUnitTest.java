@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
  * and performing cache operations.
  * </p>
  */
-public class BookServiceUnitTest {
+class BookServiceUnitTest {
 
     @Mock
     private SwiftCache<String, Book> bookCache;

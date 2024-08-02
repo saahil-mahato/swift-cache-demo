@@ -27,7 +27,7 @@ import static org.hamcrest.Matchers.is;
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class BookControllerIntegrationTest {
+class BookControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
