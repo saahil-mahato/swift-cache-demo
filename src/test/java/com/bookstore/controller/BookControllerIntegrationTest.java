@@ -1,5 +1,6 @@
 package com.bookstore.controller;
 
+import com.bookstore.BookstoreApplication;
 import com.bookstore.model.Book;
 import com.bookstore.repository.BookRepository;
 import com.bookstore.service.BookService;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.hamcrest.Matchers.is;
@@ -164,6 +166,24 @@ class BookControllerIntegrationTest {
     }
 
     /**
+     * Test context
+     */
+    @Test
+    void testContext() {
+        // This test will pass if the application context loads successfully
+    }
+
+    /**
+     * Test main
+     */
+    @Test
+    void testMain() {
+        // This test will check if the main method can be called without exceptions
+        assertThatNoException().isThrownBy(() -> BookstoreApplication.main(new String[] {}));
+    }
+
+
+    /**
      * Extracts the ID from the JSON response string.
      * <p>
      * This method uses {@link ObjectMapper} to parse the response and extract the ID field.
@@ -187,4 +207,6 @@ class BookControllerIntegrationTest {
             throw new RuntimeException("Response does not contain an 'id' field");
         }
     }
+
+
 }

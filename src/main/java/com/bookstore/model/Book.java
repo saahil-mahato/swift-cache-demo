@@ -41,7 +41,7 @@ public class Book {
         this.title = title;
         this.author = author;
         this.price = price;
-        this.id = generateId(title, author);
+        setId(generateId(title, author));
     }
 
     /**

@@ -8,6 +8,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.LinkedList;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -74,7 +76,7 @@ class BookServiceUnitTest {
      * <ol>
      *   <li>Sets up a book with known properties.</li>
      *   <li>Calls the {@link BookService#addBook(Book)} method.</li>
-     *   <li>Verifies that the {@link SwiftCache#put(String, Book)} method was called with the correct parameters.</li>
+     *   <li>Verifies that the {@link SwiftCache#put(Object, Object)} method was called with the correct parameters.</li>
      * </ol>
      * </p>
      */
@@ -97,7 +99,7 @@ class BookServiceUnitTest {
      * This test performs the following steps:
      * <ol>
      *   <li>Calls the {@link BookService#removeBook(String)} method with a known book ID.</li>
-     *   <li>Verifies that the {@link SwiftCache#remove(String)} method was called with the correct ID.</li>
+     *   <li>Verifies that the {@link SwiftCache#remove(Object)} method was called with the correct ID.</li>
      * </ol>
      * </p>
      */
@@ -146,13 +148,30 @@ class BookServiceUnitTest {
     }
 
     /**
-     * Tests clearing the cache.
+     * Tests creating books.
      * <p>
      * This test performs the following steps:
      * <ol>
-     *   <li>Calls the {@link BookService#clearCache()} method.</li>
-     *   <li>Verifies that the {@link SwiftCache#clear()} method was called exactly once.</li>
+     *   <li>Calls the {@link Book} constructor.</li>
+     *   <li>Verifies that the {@link Book} was created with the correct data..</li>
      * </ol>
      * </p>
      */
+    @Test
+    void testBookCreation() {
+        Book book = new Book("title1", "author1", 5.99);
+
+        assertEquals("title1", book.getTitle());
+        assertEquals("author1", book.getAuthor());
+        assertEquals(5.99, book.getPrice());
+        assertEquals(Book.generateId(book.getTitle(), book.getAuthor()), book.getId());
+
+        Book book2 = new Book("title1", "author1", 5.99);
+
+        assertEquals(book, book2);
+        assertNotEquals(book, null);
+        assertNotEquals(book, new LinkedList<>());
+        assertEquals(book, book);
+        assertNotNull(book.hashCode());
+    }
 }

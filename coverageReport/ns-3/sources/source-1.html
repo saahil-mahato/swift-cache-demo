@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CacheConfig</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.bookstore.config</a>
+</div>
+
+<h1>Coverage Summary for Class: CacheConfig (com.bookstore.config)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CacheConfig</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CacheConfig$$EnhancerBySpringCGLIB$$761a08d</td>
+  </tr>
+  <tr>
+    <td class="name">CacheConfig$$EnhancerBySpringCGLIB$$761a08d$$FastClassBySpringCGLIB$$6baa182f</td>
+  </tr>
+  <tr>
+    <td class="name">CacheConfig$$FastClassBySpringCGLIB$$c1aafffb</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bookstore.config;
+&nbsp;
+&nbsp;import com.bookstore.cache.BookCacheRepository;
+&nbsp;import com.bookstore.model.Book;
+&nbsp;import org.swiftcache.SwiftCacheManager;
+&nbsp;import org.swiftcache.cache.SwiftCache;
+&nbsp;import org.swiftcache.cache.SwiftCacheConfig;
+&nbsp;import org.springframework.context.annotation.Bean;
+&nbsp;import org.springframework.context.annotation.Configuration;
+&nbsp;
+&nbsp;/**
+&nbsp; * Configuration class for setting up the caching mechanism using {@link SwiftCache}.
+&nbsp; * &lt;p&gt;
+&nbsp; * This class provides the configuration for {@link SwiftCache} by defining the cache properties
+&nbsp; * and initializing the {@link SwiftCacheManager} with a custom {@link BookCacheRepository}.
+&nbsp; * &lt;/p&gt;
+&nbsp; */
+&nbsp;@Configuration
+<b class="fc">&nbsp;public class CacheConfig {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates and configures a {@link SwiftCache} bean for caching {@link Book} entities.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The configuration includes setting the maximum cache size to 100 entries, using
+&nbsp;     * &quot;LRU&quot; (Least Recently Used) eviction policy, and specifying &quot;ReadThrough&quot; and
+&nbsp;     * &quot;WriteAlways&quot; strategies for cache reads and writes.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param bookCacheRepository the {@link BookCacheRepository} to be used by the cache manager
+&nbsp;     * @return a {@link SwiftCache} instance configured with the specified properties
+&nbsp;     */
+&nbsp;    @Bean
+&nbsp;    public SwiftCache&lt;String, Book&gt; getSwiftCache(BookCacheRepository bookCacheRepository) {
+&nbsp;        // Create SwiftCacheConfig with properties
+<b class="fc">&nbsp;        SwiftCacheConfig config = new SwiftCacheConfig(100, &quot;LRU&quot;, &quot;ReadThrough&quot;, &quot;WriteAlways&quot;);</b>
+&nbsp;
+&nbsp;        // Create SwiftCacheManager with config and repository
+<b class="fc">&nbsp;        SwiftCacheManager&lt;String, Book&gt; cacheManager = new SwiftCacheManager&lt;&gt;(config, bookCacheRepository);</b>
+&nbsp;
+<b class="fc">&nbsp;        return cacheManager.getSwiftCache();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-08-02 14:45</div>
+</div>
+</body>
+</html>
