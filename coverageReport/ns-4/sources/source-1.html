@@ -63,7 +63,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (7/7)
+    (8/8)
   </span>
 </td>
 </tr>
@@ -78,6 +78,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.bookstore.controller;
 &nbsp;
 &nbsp;import com.bookstore.model.Book;
+&nbsp;import com.bookstore.model.BookDTO;
+&nbsp;import com.bookstore.model.BookMapper;
 &nbsp;import com.bookstore.service.BookService;
 &nbsp;import org.springframework.beans.factory.annotation.Autowired;
 &nbsp;import org.springframework.web.bind.annotation.*;
@@ -113,11 +115,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    /**
 &nbsp;     * Adds a new {@link Book} to the system.
 &nbsp;     *
-&nbsp;     * @param book the {@link Book} to add
+&nbsp;     * @param bookDTO the dto of the {@link BookDTO} to add
 &nbsp;     * @return the added {@link Book}
 &nbsp;     */
 &nbsp;    @PostMapping
-&nbsp;    public Book addBook(@RequestBody Book book) {
+&nbsp;    public Book addBook(@RequestBody BookDTO bookDTO) {
+<b class="fc">&nbsp;        Book book = BookMapper.toEntity(bookDTO);</b>
 <b class="fc">&nbsp;        return bookService.addBook(book);</b>
 &nbsp;    }
 &nbsp;
@@ -172,7 +175,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-02 14:45</div>
+    <div style="float:right;">generated on 2024-08-05 12:06</div>
 </div>
 </body>
 </html>

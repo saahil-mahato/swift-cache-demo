@@ -102,8 +102,7 @@
             <groupId>org.swiftcache</groupId>
             <artifactId>SwiftCache</artifactId>
             <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/SwiftCache.jar</systemPath>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
