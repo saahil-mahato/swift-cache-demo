@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import java.util.Objects;
 
 /**
  * Represents a {@link Book} entity with properties such as id, title, author, and price.
@@ -141,34 +140,5 @@ public class Book {
     public void setPrice(Double price) {
         this.price = price;
     }
-
-    /**
-     * Compares this book to another object for equality.
-     * <p>
-     * Two books are considered equal if they have the same ID.
-     * </p>
-     *
-     * @param o the object to compare this book with
-     * @return {@code true} if this book is equal to the specified object, otherwise {@code false}
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return Objects.equals(id, book.id);
-    }
-
-    /**
-     * Returns the hash code value for this book.
-     * <p>
-     * The hash code is computed based on the book's ID.
-     * </p>
-     *
-     * @return the hash code value for this book
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
+

@@ -1,14 +1,14 @@
 package com.bookstore.service;
 
 import com.bookstore.model.Book;
+import com.bookstore.model.BookDTO;
+import com.bookstore.model.BookMapper;
 import org.swiftcache.cache.SwiftCache;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -166,12 +166,10 @@ class BookServiceUnitTest {
         assertEquals(5.99, book.getPrice());
         assertEquals(Book.generateId(book.getTitle(), book.getAuthor()), book.getId());
 
-        Book book2 = new Book("title1", "author1", 5.99);
+        BookDTO bookDto = BookMapper.toDTO(book);
 
-        assertEquals(book, book2);
-        assertNotEquals(book, null);
-        assertNotEquals(book, new LinkedList<>());
-        assertEquals(book, book);
-        assertNotNull(book.hashCode());
+        assertEquals(book.getTitle(), bookDto.getTitle());
+        assertEquals(book.getAuthor(), bookDto.getAuthor());
+        assertEquals(book.getPrice(), bookDto.getPrice());
     }
 }

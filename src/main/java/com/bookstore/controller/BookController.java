@@ -1,6 +1,8 @@
 package com.bookstore.controller;
 
 import com.bookstore.model.Book;
+import com.bookstore.model.BookDTO;
+import com.bookstore.model.BookMapper;
 import com.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,11 +38,12 @@ public class BookController {
     /**
      * Adds a new {@link Book} to the system.
      *
-     * @param book the {@link Book} to add
+     * @param bookDTO the dto of the {@link BookDTO} to add
      * @return the added {@link Book}
      */
     @PostMapping
-    public Book addBook(@RequestBody Book book) {
+    public Book addBook(@RequestBody BookDTO bookDTO) {
+        Book book = BookMapper.toEntity(bookDTO);
         return bookService.addBook(book);
     }
 

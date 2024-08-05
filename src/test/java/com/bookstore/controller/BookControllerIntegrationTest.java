@@ -31,14 +31,18 @@ import static org.hamcrest.Matchers.is;
 @AutoConfigureMockMvc
 class BookControllerIntegrationTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    private final MockMvc mockMvc;
+
+    private final BookRepository bookRepository;
+
+    private final BookService bookService;
 
     @Autowired
-    private BookRepository bookRepository;
-
-    @Autowired
-    private BookService bookService;
+    public BookControllerIntegrationTest(MockMvc mockMvc, BookService bookService, BookRepository bookRepository) {
+        this.mockMvc = mockMvc;
+        this.bookRepository = bookRepository;
+        this.bookService = bookService;
+    }
 
     /**
      * Sets up the test environment before each test.
@@ -171,14 +175,6 @@ class BookControllerIntegrationTest {
     @Test
     void testContext() {
         // This test will pass if the application context loads successfully
-    }
-
-    /**
-     * Test main
-     */
-    @Test
-    void testMain() {
-        // This test will check if the main method can be called without exceptions
         assertThatNoException().isThrownBy(() -> BookstoreApplication.main(new String[] {}));
     }
 
