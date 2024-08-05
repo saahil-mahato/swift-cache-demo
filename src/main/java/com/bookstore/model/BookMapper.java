@@ -20,11 +20,7 @@ public class BookMapper {
      * @return the converted {@link BookDTO} object
      */
     public static BookDTO toDTO(Book book) {
-        BookDTO bookDTO = new BookDTO();
-        bookDTO.setTitle(book.getTitle());
-        bookDTO.setAuthor(book.getAuthor());
-        bookDTO.setPrice(book.getPrice());
-        return bookDTO;
+        return new BookDTO(book.getTitle(), book.getAuthor(), book.getPrice());
     }
 
     /**
