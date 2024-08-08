@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>Coverage Report > CacheConfig</title>
+  <title>Coverage Report > BookMongoDBCacheRepository</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.bookstore.config</a>
+    <a href="../index.html">com.bookstore.mongorepo</a>
 </div>
 
-<h1>Coverage Summary for Class: CacheConfig (com.bookstore.config)</h1>
+<h1>Coverage Summary for Class: BookMongoDBCacheRepository (com.bookstore.mongorepo)</h1>
 
 <table class="coverageStats">
 
@@ -38,13 +38,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">CacheConfig</td>
+  <td class="name">BookMongoDBCacheRepository</td>
 <td class="coverageStat">
   <span class="percent">
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (5/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -52,18 +52,30 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (4/4)
+    (6/6)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">CacheConfig$$EnhancerBySpringCGLIB$$6d253e79</td>
+    <td class="name">BookMongoDBCacheRepository$MockitoMock$pzjUBUJ5</td>
   </tr>
   <tr>
-    <td class="name">CacheConfig$$EnhancerBySpringCGLIB$$6d253e79$$FastClassBySpringCGLIB$$226135c3</td>
+    <td class="name">BookMongoDBCacheRepository$MockitoMock$pzjUBUJ5$auxiliary$0GyczFJ9</td>
   </tr>
   <tr>
-    <td class="name">CacheConfig$$FastClassBySpringCGLIB$$c1aafffb</td>
+    <td class="name">BookMongoDBCacheRepository$MockitoMock$pzjUBUJ5$auxiliary$1MPMJBbP</td>
+  </tr>
+  <tr>
+    <td class="name">BookMongoDBCacheRepository$MockitoMock$pzjUBUJ5$auxiliary$3BmhxkQu</td>
+  </tr>
+  <tr>
+    <td class="name">BookMongoDBCacheRepository$MockitoMock$pzjUBUJ5$auxiliary$fLtTyElH</td>
+  </tr>
+  <tr>
+    <td class="name">BookMongoDBCacheRepository$MockitoMock$pzjUBUJ5$auxiliary$vZZEc1dO</td>
+  </tr>
+  <tr>
+    <td class="name">BookMongoDBCacheRepository$MockitoMock$pzjUBUJ5$auxiliary$yC92bHzj</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -72,7 +84,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (5/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +92,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (4/4)
+    (6/6)
   </span>
 </td>
 </tr>
@@ -91,46 +103,40 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.bookstore.config;
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bookstore.mongorepo;
 &nbsp;
-&nbsp;import com.bookstore.cache.BookCacheRepository;
-&nbsp;import com.bookstore.model.Book;
-&nbsp;import org.swiftcache.SwiftCacheManager;
-&nbsp;import org.swiftcache.cache.SwiftCache;
-&nbsp;import org.swiftcache.cache.SwiftCacheConfig;
-&nbsp;import org.springframework.context.annotation.Bean;
-&nbsp;import org.springframework.context.annotation.Configuration;
+&nbsp;import com.bookstore.entities.Book;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;import org.swiftcache.cacherepository.ICacheRepository;
+&nbsp;import org.swiftcache.utils.TriFunction;
 &nbsp;
-&nbsp;/**
-&nbsp; * Configuration class for setting up the caching mechanism using {@link SwiftCache}.
-&nbsp; * &lt;p&gt;
-&nbsp; * This class provides the configuration for {@link SwiftCache} by defining the cache properties
-&nbsp; * and initializing the {@link SwiftCacheManager} with a custom {@link BookCacheRepository}.
-&nbsp; * &lt;/p&gt;
-&nbsp; */
-&nbsp;@Configuration
-<b class="fc">&nbsp;public class CacheConfig {</b>
 &nbsp;
-&nbsp;    /**
-&nbsp;     * Creates and configures a {@link SwiftCache} bean for caching {@link Book} entities.
-&nbsp;     * &lt;p&gt;
-&nbsp;     * The configuration includes setting the maximum cache size to 100 entries, using
-&nbsp;     * &quot;LRU&quot; (Least Recently Used) eviction policy, and specifying &quot;ReadThrough&quot; and
-&nbsp;     * &quot;WriteAlways&quot; strategies for cache reads and writes.
-&nbsp;     * &lt;/p&gt;
-&nbsp;     *
-&nbsp;     * @param bookCacheRepository the {@link BookCacheRepository} to be used by the cache manager
-&nbsp;     * @return a {@link SwiftCache} instance configured with the specified properties
-&nbsp;     */
-&nbsp;    @Bean
-&nbsp;    public SwiftCache&lt;String, Book&gt; getSwiftCache(BookCacheRepository bookCacheRepository) {
-&nbsp;        // Create SwiftCacheConfig with properties
-<b class="fc">&nbsp;        SwiftCacheConfig config = new SwiftCacheConfig(100, &quot;LRU&quot;, &quot;ReadThrough&quot;, &quot;WriteAlways&quot;);</b>
+&nbsp;@Component
+&nbsp;public class BookMongoDBCacheRepository implements ICacheRepository&lt;String, Book&gt; {
+&nbsp;    private final BookRepositoryMongoDB mongoDBRepository;
 &nbsp;
-&nbsp;        // Create SwiftCacheManager with config and repository
-<b class="fc">&nbsp;        SwiftCacheManager&lt;String, Book&gt; cacheManager = new SwiftCacheManager&lt;&gt;(config, bookCacheRepository);</b>
+<b class="fc">&nbsp;    public BookMongoDBCacheRepository(BookRepositoryMongoDB repository) {</b>
+<b class="fc">&nbsp;        this.mongoDBRepository = repository;</b>
+&nbsp;    }
 &nbsp;
-<b class="fc">&nbsp;        return cacheManager.getSwiftCache();</b>
+&nbsp;    @Override
+&nbsp;    public Book get(String key) {
+<b class="fc">&nbsp;        return mongoDBRepository.findById(key).orElse(null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void put(String key, Book value) {
+<b class="fc">&nbsp;        mongoDBRepository.save(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void remove(String key) {
+<b class="fc">&nbsp;        mongoDBRepository.deleteById(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;R&gt; R executeWithCache(TriFunction&lt;ICacheRepository&lt;String, Book&gt;, String, Book, R&gt; operation, String key, Book value) {
+<b class="fc">&nbsp;        return operation.apply(this, key, value);</b>
 &nbsp;    }
 &nbsp;}
 </code>
@@ -156,7 +162,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-05 12:06</div>
+    <div style="float:right;">generated on 2024-08-08 15:37</div>
 </div>
 </body>
 </html>

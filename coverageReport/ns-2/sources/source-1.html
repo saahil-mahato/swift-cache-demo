@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>Coverage Report > BookCacheRepository</title>
+  <title>Coverage Report > Book</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,18 +19,15 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.bookstore.cache</a>
+    <a href="../index.html">com.bookstore.entities</a>
 </div>
 
-<h1>Coverage Summary for Class: BookCacheRepository (com.bookstore.cache)</h1>
+<h1>Coverage Summary for Class: Book (com.bookstore.entities)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -41,13 +38,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">BookCacheRepository</td>
+  <td class="name">Book</td>
 <td class="coverageStat">
   <span class="percent">
     100%
   </span>
   <span class="absValue">
-    (1/1)
+    (7/7)
   </span>
 </td>
 <td class="coverageStat">
@@ -55,19 +52,35 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (4/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (5/5)
+    (7/7)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">Book$HibernateProxy$7F77UACy</td>
+  </tr>
+  <tr>
+    <td class="name">Book$HibernateProxy$Qe5GcGRJ</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -75,68 +88,29 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.bookstore.cache;
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bookstore.entities;
 &nbsp;
-&nbsp;import com.bookstore.model.Book;
-&nbsp;import com.bookstore.repository.BookRepository;
-&nbsp;import org.swiftcache.cacherepository.ICacheRepository;
-&nbsp;import org.springframework.beans.factory.annotation.Autowired;
-&nbsp;import org.springframework.stereotype.Component;
+&nbsp;import lombok.Getter;
+&nbsp;import lombok.Setter;
+&nbsp;import org.springframework.data.mongodb.core.mapping.Document;
 &nbsp;
-&nbsp;/**
-&nbsp; * Implementation of the {@link ICacheRepository} interface for managing {@link Book} entities.
-&nbsp; * &lt;p&gt;
-&nbsp; * This class provides a caching layer for {@link Book} entities using a {@link BookRepository}
-&nbsp; * to perform CRUD operations on the underlying data store.
-&nbsp; * &lt;/p&gt;
-&nbsp; * &lt;p&gt;
-&nbsp; * It implements the caching interface methods to get, put, and remove {@link Book} instances
-&nbsp; * from the data store.
-&nbsp; * &lt;/p&gt;
-&nbsp; */
-&nbsp;@Component
-&nbsp;public class BookCacheRepository implements ICacheRepository&lt;String, Book&gt; {
+&nbsp;import javax.persistence.Entity;
+&nbsp;import javax.persistence.Id;
+&nbsp;import javax.persistence.Table;
 &nbsp;
-&nbsp;    private final BookRepository bookRepository;
+<b class="fc">&nbsp;@Setter</b>
+&nbsp;@Getter
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;books_postgres&quot;)
+&nbsp;@Document(collection = &quot;books_mongo&quot;)
+<b class="fc">&nbsp;public class Book {</b>
+&nbsp;    @Id
+<b class="fc">&nbsp;    private String id;</b>
 &nbsp;
-&nbsp;
-&nbsp;    @Autowired
-<b class="fc">&nbsp;    public BookCacheRepository(BookRepository bookRepository) {</b>
-<b class="fc">&nbsp;        this.bookRepository = bookRepository;</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    /**
-&nbsp;     * Retrieves a {@link Book} from the data store using the given key.
-&nbsp;     *
-&nbsp;     * @param key the identifier of the {@link Book} to retrieve
-&nbsp;     * @return the {@link Book} with the specified key, or {@code null} if no {@link Book}
-&nbsp;     *         with the key exists
-&nbsp;     */
-&nbsp;    @Override
-&nbsp;    public Book get(String key) {
-<b class="fc">&nbsp;        return bookRepository.findById(key).orElse(null);</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    /**
-&nbsp;     * Adds or updates a {@link Book} in the data store with the given key.
-&nbsp;     *
-&nbsp;     * @param key the identifier of the {@link Book}
-&nbsp;     * @param value the {@link Book} to store
-&nbsp;     */
-&nbsp;    @Override
-&nbsp;    public void put(String key, Book value) {
-<b class="fc">&nbsp;        bookRepository.save(value);</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    /**
-&nbsp;     * Removes a {@link Book} from the data store with the specified key.
-&nbsp;     *
-&nbsp;     * @param key the identifier of the {@link Book} to remove
-&nbsp;     */
-&nbsp;    @Override
-&nbsp;    public void remove(String key) {
-<b class="fc">&nbsp;        bookRepository.deleteById(key);</b>
-&nbsp;    }
+<b class="fc">&nbsp;    private String title;</b>
+<b class="fc">&nbsp;    private String author;</b>
+<b class="fc">&nbsp;    private String isbn;</b>
+<b class="fc">&nbsp;    private double price;</b>
 &nbsp;}
 </code>
 </pre>
@@ -161,7 +135,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-05 12:06</div>
+    <div style="float:right;">generated on 2024-08-08 15:37</div>
 </div>
 </body>
 </html>
