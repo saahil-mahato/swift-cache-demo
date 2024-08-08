@@ -7,8 +7,30 @@ import org.swiftcache.SwiftCacheManager;
 import org.swiftcache.cache.SwiftCache;
 import org.swiftcache.cache.SwiftCacheConfig;
 
+/**
+ * Configuration class for setting up the cache for the bookstore application.
+ *
+ * <p>
+ * This class defines the cache configuration and creates a {@link SwiftCache}
+ * instance for managing the cache of {@link Book} entities.
+ * </p>
+ */
 @Configuration
 public class CacheConfig {
+
+    /**
+     * Creates a {@link SwiftCache} instance with the specified configuration.
+     *
+     * <p>
+     * The cache configuration includes:
+     * - Maximum size of 100 entries
+     * - Least Recently Used (LRU) eviction strategy
+     * - Read-through policy for fetching data from the cache
+     * - Write-always policy for updating the cache on write operations
+     * </p>
+     *
+     * @return the configured SwiftCache instance
+     */
     @Bean
     public SwiftCache<String, Book> getSwiftCache() {
         // Create cache configuration

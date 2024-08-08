@@ -16,6 +16,16 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit tests for the {@link BookPostgreSQLCacheRepository} class.
+ *
+ * <p>
+ * This class tests the functionality of the BookPostgreSQLCacheRepository,
+ * which provides caching capabilities for {@link Book} entities stored
+ * in a PostgreSQL repository. It uses Mockito for mocking dependencies and
+ * JUnit for assertions.
+ * </p>
+ */
 class BookPostgreSQLCacheRepositoryTest {
 
     @Mock
@@ -26,6 +36,10 @@ class BookPostgreSQLCacheRepositoryTest {
 
     private Book book;
 
+    /**
+     * Sets up the test environment before each test method.
+     * Initializes mocks and creates a sample Book instance.
+     */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -37,6 +51,9 @@ class BookPostgreSQLCacheRepositoryTest {
         book.setPrice(9.99);
     }
 
+    /**
+     * Tests the retrieval of a Book entity from the PostgreSQL repository.
+     */
     @Test
     void testGetBook() {
         when(postgreSQLRepository.findById("1")).thenReturn(Optional.of(book));
@@ -44,18 +61,27 @@ class BookPostgreSQLCacheRepositoryTest {
         assertEquals(book, retrievedBook);
     }
 
+    /**
+     * Tests the saving of a Book entity to the PostgreSQL repository.
+     */
     @Test
     void testPutBook() {
         postgreSQLCacheRepository.put("1", book);
         verify(postgreSQLRepository, times(1)).save(book);
     }
 
+    /**
+     * Tests the removal of a Book entity from the PostgreSQL repository.
+     */
     @Test
     void testRemoveBook() {
         postgreSQLCacheRepository.remove("1");
         verify(postgreSQLRepository, times(1)).deleteById("1");
     }
 
+    /**
+     * Tests the execution of a custom operation with the cache.
+     */
     @Test
     void testExecuteWithCache() {
         TriFunction<ICacheRepository<String, Book>, String, Book, Book> operation =

@@ -7,8 +7,19 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Unit tests for the {@link BookMapper} class.
+ *
+ * <p>
+ * This class tests the functionality of the BookMapper, which is responsible
+ * for converting between {@link Book} entities and {@link BookDTO} objects.
+ * </p>
+ */
 class BookMapperTest {
 
+    /**
+     * Tests the conversion from a {@link Book} entity to a {@link BookDTO}.
+     */
     @Test
     void testToDTO() {
         Book book = new Book();
@@ -23,6 +34,9 @@ class BookMapperTest {
         assertEquals(book.getTitle(), dto.getTitle());
     }
 
+    /**
+     * Tests the conversion from a {@link BookDTO} to a {@link Book} entity.
+     */
     @Test
     void testToEntity() {
         BookDTO dto = new BookDTO();
