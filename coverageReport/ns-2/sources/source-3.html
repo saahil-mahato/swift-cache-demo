@@ -1,0 +1,132 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BookMapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.bookstore.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: BookMapper (com.bookstore.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BookMapper</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bookstore.entities;
+&nbsp;
+&nbsp;public class BookMapper {
+&nbsp;
+&nbsp;    private BookMapper() {
+&nbsp;        // Empty Constructor
+&nbsp;    }
+&nbsp;
+&nbsp;    public static BookDTO toDTO(Book entity) {
+<b class="fc">&nbsp;        BookDTO dto = new BookDTO();</b>
+<b class="fc">&nbsp;        dto.setId(entity.getId());</b>
+<b class="fc">&nbsp;        dto.setTitle(entity.getTitle());</b>
+<b class="fc">&nbsp;        dto.setAuthor(entity.getAuthor());</b>
+<b class="fc">&nbsp;        dto.setIsbn(entity.getIsbn());</b>
+<b class="fc">&nbsp;        dto.setPrice(entity.getPrice());</b>
+<b class="fc">&nbsp;        return dto;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Book toEntity(BookDTO dto) {
+<b class="fc">&nbsp;        Book entity = new Book();</b>
+<b class="fc">&nbsp;        entity.setId(dto.getId());</b>
+<b class="fc">&nbsp;        entity.setTitle(dto.getTitle());</b>
+<b class="fc">&nbsp;        entity.setAuthor(dto.getAuthor());</b>
+<b class="fc">&nbsp;        entity.setIsbn(dto.getIsbn());</b>
+<b class="fc">&nbsp;        entity.setPrice(dto.getPrice());</b>
+<b class="fc">&nbsp;        return entity;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-08-08 15:37</div>
+</div>
+</body>
+</html>
