@@ -42,10 +42,10 @@ public class BookController {
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBook(@PathVariable String id) {
         Book book = bookCacheService.getBook(id);
-        if (book != null) {
-            return new ResponseEntity<>(book, HttpStatus.OK);
+        if (book == null) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
     /**
@@ -59,10 +59,10 @@ public class BookController {
         Book book = BookMapper.toEntity(bookDTO);
         Book savedBook = bookCacheService.putBook(book);
 
-        if (savedBook != null) {
-            return new ResponseEntity<>(savedBook, HttpStatus.OK);
+        if (savedBook == null) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(savedBook, HttpStatus.OK);
     }
 
     /**
@@ -87,9 +87,9 @@ public class BookController {
     public ResponseEntity<Book> calculateBookPrice(@RequestBody BookDTO bookDTO) {
         Book book = BookMapper.toEntity(bookDTO);
         Book updatedBook = bookCacheService.calculateBookPrice(book);
-        if (updatedBook != null) {
-            return new ResponseEntity<>(updatedBook, HttpStatus.OK);
+        if (updatedBook == null) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(updatedBook, HttpStatus.OK);
     }
 }
